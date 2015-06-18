@@ -1,0 +1,25 @@
+---
+title: "Exponential Distributions and the Central Limit Theorem"
+author: "Toni Rib"
+output: word_document
+---
+
+## Overview
+
+In this paper, we will explore the ToothGrowth dataset which is provided with R. This dataset shows the effect of Vitamin C on tooth growth in Guinea Pigs when given various doses of Vitamin C (0.5mg, 1mg, 2mg) with two delivery methods (orange juice or ascorbic acid).
+
+## Load The Data
+
+```{r Load Data, cache = TRUE}
+data(ToothGrowth)
+str(ToothGrowth)
+summary(ToothGrowth)
+```
+
+```{r View Data}
+library(ggplot2)
+qplot(dose, len, data=ToothGrowth, geom="point", facets = . ~ supp)
+qplot(dose, len, data=ToothGrowth, geom="point", color = supp)
+qplot(supp, len, data=ToothGrowth, geom="point", facets = . ~ dose)
+qplot(supp, len, data=ToothGrowth, geom="boxplot", facets = . ~ dose)
+```
