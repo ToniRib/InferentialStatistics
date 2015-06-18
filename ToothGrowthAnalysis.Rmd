@@ -1,14 +1,18 @@
 ---
-title: "Exponential Distributions and the Central Limit Theorem"
+title: "Effect of Vitamin C on the Tooth Length of Guinea Pigs"
 author: "Toni Rib"
-output: word_document
+output: html_document
 ---
 
 ## Overview
 
-In this paper, we will explore the ToothGrowth dataset which is provided with R. This dataset shows the effect of Vitamin C on tooth growth in Guinea Pigs when given various doses of Vitamin C (0.5mg, 1mg, 2mg) with two delivery methods (orange juice or ascorbic acid).
+In this paper, we will explore the ToothGrowth dataset which is provided with R. This dataset shows the effect of Vitamin C on tooth growth in Guinea Pigs when given various doses of Vitamin C (0.5mg, 1mg, 2mg) with two delivery methods or supplements (orange juice or ascorbic acid). 
+
+SUMMARY STATEMENT HERE ALSO.
 
 ## Load The Data
+
+First, we will load the data from R and take a look at what kind of variables are contained in the dataset.
 
 ```{r Load Data, cache = TRUE}
 data(ToothGrowth)
@@ -16,10 +20,20 @@ str(ToothGrowth)
 summary(ToothGrowth)
 ```
 
-```{r View Data}
+We can see that we have loaded a data frame with 60 observations of 3 variables, two of which are numbers (dose & tooth length) and one of which is a factor (supplment type). The tooth length varies from 4.2 to 33.9, with a mean of 18.81.
+
+## Exploratory Plot
+
+It is worthwhile to create a simple plot in order to get an idea of how the data looks and how it might be correlated. To do that, we will use a boxplot showing tooth length by supplement type for each dosage.
+
+```{r Plot Data}
 library(ggplot2)
-qplot(dose, len, data=ToothGrowth, geom="point", facets = . ~ supp)
-qplot(dose, len, data=ToothGrowth, geom="point", color = supp)
-qplot(supp, len, data=ToothGrowth, geom="point", facets = . ~ dose)
-qplot(supp, len, data=ToothGrowth, geom="boxplot", facets = . ~ dose)
+qplot(supp, len, data=ToothGrowth, geom = "boxplot", facets = . ~ dose, 
+      main = "Tooth Length by Supplement and Dosage", xlab = "Supplement/Delivery Method",
+      ylab = "Dosage [mg]")
 ```
+
+It appears that for the 0.5mg and 1mg dosages, tooth length is longer when orange juice (OJ) is used to deliver the Vitamin C. However, at the 2mg dosage, the tooth length average is approximately the same for both supplements, though asorbic acid (VC) does have more variability.
+
+## Confidence Intervals
+
